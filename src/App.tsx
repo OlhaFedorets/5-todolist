@@ -73,6 +73,13 @@ function App() {
         setTodolists(nextState)
     }
 
+    const removeTodolist = (todolistId: string) => {
+        setTodolists(todolists.filter(tl=> tl.id !== todolistId))
+        delete tasks[todolistId]
+    }
+
+
+
     const todolistComponents = todolists.map(tl => {
 
         let tasksForTodolist = tasks[tl.id]
@@ -95,6 +102,7 @@ function App() {
                 changeFilter={changeFilter}
                 addTask={addTask}
                 changeTaskStatus={changeTaskStatus}
+                removeTodolist={removeTodolist}
             />
         )
     })
