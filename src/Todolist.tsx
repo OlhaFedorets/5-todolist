@@ -11,10 +11,11 @@ type PropsType = {
 	changeFilter: (filter: FilterValuesType, todolistId: string) => void
 	addTask: (title: string, todolistId: string) => void
 	changeTaskStatus: (taskId: string, taskStatus: boolean, todolistId: string) => void
+	removeTodolist: (todolistId: string) => void
 }
 
 export const Todolist = (props: PropsType) => {
-	const {todolistId, title, tasks, filter, removeTask, changeFilter, addTask, changeTaskStatus} = props
+	const {todolistId, title, tasks, filter, removeTask, changeFilter, addTask, changeTaskStatus, removeTodolist} = props
 
 	const [taskTitle, setTaskTitle] = useState('')
 	const [error, setError] = useState<string | null>(null)
@@ -45,7 +46,10 @@ export const Todolist = (props: PropsType) => {
 
 	return (
 		<div>
-			<h3>{title}</h3>
+			<h3>
+				{title}
+				<Button title={'x'} onClick={()=>removeTodolist(todolistId)}/>
+			</h3>
 			<div>
 				<input
 					className={error ? 'error': ''}
